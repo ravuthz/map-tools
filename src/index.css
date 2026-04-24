@@ -18,3 +18,22 @@ body {
 
 .maplibregl-ctrl-top-right { top: 12px; right: 12px; }
 .mapboxgl-ctrl-group, .maplibregl-ctrl-group { border-radius: 10px !important; overflow: hidden; }
+
+.map-tools-search-button {
+  align-items: center;
+  display: flex !important;
+  justify-content: center;
+}
+
+.map-tools-search-icon {
+  background-color: #333;
+  display: block;
+  height: 16px;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' stroke='black' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath d='m21 21-4.34-4.34'/%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3C/svg%3E") center / contain no-repeat;
+  width: 16px;
+}
+
+.map-tools-search-button:hover .map-tools-search-icon,
+.map-tools-search-button:focus-visible .map-tools-search-icon {
+  background-color: hsl(217 91% 60%);
+}

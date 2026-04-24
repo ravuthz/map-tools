@@ -1,9 +1,11 @@
 import { useMemo, useState } from 'react'
+import { Download, Eye, FileCheck2, PencilLine } from 'lucide-react'
 import { toast } from 'sonner'
 import type { FeatureCollection, GeoJsonObject } from 'geojson'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { toFormattedGeoJson, validateGeoJson } from '@/lib/geojson'
 
 interface GeoJsonPanelProps {
@@ -44,16 +46,62 @@ export function GeoJsonPanel({ featureCollection, onImport }: GeoJsonPanelProps)
     <Card className="flex h-full min-h-0 flex-col overflow-y-auto p-4">
       {/* <div className="mb-2 text-lg font-semibold">GEOJSON</div> */}
       <Tabs defaultValue="viewer" className="flex min-h-0 flex-1 flex-col">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <TabsList className="shrink-0">
-            <TabsTrigger value="viewer">Viewer</TabsTrigger>
-            <TabsTrigger value="editor">Editor</TabsTrigger>
-          </TabsList>
-          <div className="flex shrink-0 gap-2">
-            <Button size="sm" variant="outline" onClick={() => onValidate(editorValue)}>Validate</Button>
-            <Button size="sm" onClick={onDownload}>Download .geojson</Button>
+        <TooltipProvider delayDuration={150}>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <TabsList className="shrink-0">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <TabsTrigger
+                    value="viewer"
+                    className="flex h-8 w-8 items-center justify-center p-0 text-slate-600 hover:bg-white/70 hover:text-slate-900 data-[state=active]:!bg-primary data-[state=active]:!text-white data-[state=active]:!shadow-sm"
+                    aria-label="Viewer"
+                    title="Viewer"
+                  >
+                    <Eye className="h-4 w-4" />
+                  </TabsTrigger>
+                </TooltipTrigger>
+                <TooltipContent side="bottom">Viewer</TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <TabsTrigger
+                    value="editor"
+                    className="flex h-8 w-8 items-center justify-center p-0 text-slate-600 hover:bg-white/70 hover:text-slate-900 data-[state=active]:!bg-primary data-[state=active]:!text-white data-[state=active]:!shadow-sm"
+                    aria-label="Editor"
+                    title="Editor"
+                  >
+                    <PencilLine className="h-4 w-4" />
+                  </TabsTrigger>
+                </TooltipTrigger>
+                <TooltipContent side="bottom">Editor</TooltipContent>
+              </Tooltip>
+            </TabsList>
+            <div className="flex shrink-0 gap-2">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    size="icon"
+                    variant="outline"
+                    aria-label="Validate GeoJSON"
+                    title="Validate GeoJSON"
+                    onClick={() => onValidate(editorValue)}
+                  >
+                    <FileCheck2 className="h-4 w-4" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent side="bottom">Validate GeoJSON</TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button size="icon" aria-label="Download .geojson" title="Download .geojson" onClick={onDownload}>
+                    <Download className="h-4 w-4" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent side="bottom">Download .geojson</TooltipContent>
+              </Tooltip>
+            </div>
           </div>
-        </div>
+        </TooltipProvider>
         <TabsContent value="viewer" className="min-h-0 flex-1">
           <pre className="h-full min-h-[320px] overflow-auto rounded-md border border-border bg-slate-50 p-3 text-xs leading-6">{formatted}</pre>
         </TabsContent>
