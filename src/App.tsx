@@ -25,7 +25,7 @@ function App() {
   const [floatingSidebar, setFloatingSidebar] = useState(true)
   const [toggleStyle, setToggleStyle] = useState<ToggleStyle>('icon-only')
   const [toolButtonLayout, setToolButtonLayout] = useState<ToolButtonLayout>('horizontal')
-  const [settingsOpen, setSettingsOpen] = useState(true)
+  const [settingsOpen, setSettingsOpen] = useState(false)
   const [floatingExpanded, setFloatingExpanded] = useState(true)
   const [leftSidebarWidth, setLeftSidebarWidth] = useState(260)
   const [rightSidebarWidth, setRightSidebarWidth] = useState(520)
