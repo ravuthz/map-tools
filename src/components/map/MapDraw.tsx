@@ -43,6 +43,16 @@ export function MapDraw({ mode, featureCollection, onChange, drawRef }: MapDrawP
     })
 
     map.addControl(new maplibregl.NavigationControl(), 'top-right')
+    map.addControl(
+      new maplibregl.GeolocateControl({
+        positionOptions: { enableHighAccuracy: true },
+        fitBoundsOptions: { maxZoom: 16 },
+        trackUserLocation: true,
+        showAccuracyCircle: true,
+        showUserLocation: true,
+      }),
+      'top-right',
+    )
     map.addControl(draw as unknown as maplibregl.IControl, 'top-right')
 
     map.on('draw.create', () => onChange(draw.getAll() as FeatureCollection))

@@ -42,7 +42,7 @@ export function GeoJsonPanel({ featureCollection, onImport }: GeoJsonPanelProps)
 
   return (
     <Card className="flex h-full min-h-0 flex-col overflow-y-auto p-4">
-      <div className="mb-2 text-lg font-semibold">GEOJSON</div>
+      {/* <div className="mb-2 text-lg font-semibold">GEOJSON</div> */}
       <Tabs defaultValue="viewer" className="flex min-h-0 flex-1 flex-col">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <TabsList className="shrink-0">
